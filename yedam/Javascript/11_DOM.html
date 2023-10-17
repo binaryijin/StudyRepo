@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        color : red;
+    }
+    .blue{
+        color : blue;
+    }
+</style>
+<body>
+    <!-- <div id="test" name="test" class="aaa"> id 중복X, id와 name은 같게 -->
+
+    <div>
+        <h1>cityes</h1>
+        <ul>
+            <li id="one" class="red">Seoul</li>
+            <li id="two" class="red">London</li>
+            <li id="three" class="red">NewYork</li>
+            <li id="four">Tokyo</li>
+        </ul>
+    </div>
+    <script>
+        // id를 활용한 DOM 객체 불러오기
+        let liTag = document.getElementById('two');
+        console.log(liTag);
+        // css선택자를 활용한 DOM 객체 불러오기
+        // . => class, # => id
+        liTag = document.querySelector("li.red");
+        console.log(liTag);
+        liTag = document.querySelector("#three");
+        console.log(liTag);
+        // class를 활용한 DOM 객체 불러오기
+        let el = document.getElementsByClassName('red');
+        console.log(el);
+        // for(let i=0; i<el.length; i++){
+        //     console.log(el[i]);
+        //     el[i].className = 'blue';
+        // }
+        // 위의 문제를 회피 하는 방법
+        for(let i=el.length-1; i>=0; i--){
+            el[i].className = 'blue';
+        }
+
+        el = document.querySelectorAll('li.blue');
+        console.log(el);
+        for(let i=0; i<el.length; i++){
+            el[i].className = "red";
+        }
+        
+        // // for...in -> 배열의 인덱스를 호출
+        // for(let i in el){
+        //     console.log(i);
+        //     console.log(el[i]); 
+        // }
+
+        // // for...of -> 배열의 요소(데이터)를 호출
+        // for(let i of el){
+        //     console.log(i);
+        // }
+
+        el = document.getElementsByTagName('li');
+        for(let i of el){
+            console.log(i);
+        }
+
+        // 가족 찾기
+        let dom =document.querySelector("#two");
+        
+        // 부모 찾기 -> parentNode
+        console.log(dom);
+        console.log(dom.parentNode);
+
+        dom.parentNode.className = 'blue';
+
+        console.log(dom.parentNode.firstElementChild);
+        // dom.parentNode.firstElementChild.textContent = "서울";
+        // dom.parentNode.firstElementChild.innerHTML = "서울";
+        // dom.parentNode.firstElementChild.innerHTML = "서울";
+        dom.parentNode.firstElementChild.innerHTML =
+        `<hr><button type=button>test</button>`;
+
+        // innerHTML = DOM 요소 + 텍스트 읽고 쓰기
+        // innerText = DOM 요소 안에 있는 텍스트 읽고 쓰기
+        // textContent = DOM 요소 안에 있는 모든 텍스트 읽고 쓰기
+
+        console.log(dom.parentNode.childNodes);
+        console.log(dom.parentNode.children);
+        console.log(dom.parentNode.children[3]);
+
+        console.log(dom.parentNode.parentNode);
+        console.log(dom.parentNode.parentNode.parentNode);
+        console.log(dom.parentNode.parentNode.children[1].children[3]);
+
+        // 형제 찾기
+        // nextElementSibling, previousElementSibling
+        dom = document.getElementById("two");
+        console.log(dom.nextElementSibling); //#three
+        console.log(dom.previousElementSibling); //#one
+    
+        // class 추가, 삭제
+        // className
+        let div = document.getElementsByTagName('div');
+        console.log(div)
+        div[0].classList.add('red');
+        div[0].classList.remove('red');
+        div[0].classList.add('blue');
+        console.log(div);
+
+
+
+
+
+
+
+
+        // // 1) CSS 선택자 
+        // document.querySelector(  ); // 한개
+        // document.querySelectorAll(  ); // 모두
+        // // 2) tag, id, class
+        // document.getElementById('test');
+        // document.getElementsByClassName('aaa');
+        // document.getElementsByTagName();
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

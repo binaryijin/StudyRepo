@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // object -> 사물, 물체...
+        // ex) 컴퓨터 -> 정보(색상, 금액, 부품...)
+        //            -> 기능(웹서핑, 코딩, 게임, 쇼핑...)
+        // object -> 속성(정보), 메소드(기능)
+        // object = {
+        //     key : value
+        // }
+
+        let product = {
+            name : "mango", 
+            kind : "fruit",
+            color : "yellow",
+            // 메소드 -> allow함수(this -> window)
+            // 메소드 안에서 함수 생성(this -> window)
+            info : function(){
+                let name = 1;
+                return `name : ${name}, kind : ${this.kind}, color : ${this.color}`;
+            }
+        }
+        console.log(product.name);
+        console.log(product.info());
+
+        // 동적 객체 속성 생성
+        let student = {};
+        student.name = "ddochi";
+        student.age = 20;
+        student.future = 'doctor';
+
+        console.log(JSON.stringify(student, null, 2)); // JSON - key : value형태로 이루어진 데이터
+        
+        // delete
+        delete student.future;
+        console.log(JSON.stringify(student, null, 2));
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

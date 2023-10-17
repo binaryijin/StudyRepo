@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- form tag -->
+    <form id="form" action="12_2_EventTarget.html">
+    <!-- <form id="form" action="12_2_EventTarget.html" onsubmit="return fnSubmit()"> -->
+    <label>이름 <input type="text" id="userId" name="userId"></label>
+    <button>확인</button>
+    </form>
+    <script>
+        // input 태그에 데이터가 있는지 없는지 확인하고
+        // 데이터가 있으면 페이지 이동, 데이터가 없으면 페이지 이동 X
+        function fnSubmit(){
+            alert('submit');
+            let txt = document.getElementById('userId');
+            // input tag에 데이터가 있는지 존재 유무 확인
+            if(txt.value == ''){
+                console.log('no data');
+                // 데이터가 존재하지 않기 때문에 submit(페이지 이동) 작동 X
+                return false;
+            }else{
+                // 데이터가 존재하므로 submit(페이지 이동) 작동 O
+                return true;
+            }
+        }
+
+        let form = document.getElementById('form');
+        form.onsubmit = function(){
+            let txt = document.getElementById('userId');
+            // input tag에 데이터가 있는지 존재 유무 확인
+            if(txt.value == ''){
+                console.log('no data');
+                // 데이터가 존재하지 않기 때문에 submit(페이지 이동) 작동 X
+                return false;
+            }else{
+                // 데이터가 존재하므로 submit(페이지 이동) 작동 O
+                return true;
+            }
+        }
+    </script>
+
+    <a href="https://www.naver.com" id="abtn" onclick="fnA()">naver</a>
+    <button type="button" id="btn">button</button>
+
+    <script>
+        let aTag = document.getElementById('abtn');
+
+        // aTag.onclick = function(){
+        //     if(!confirm('이동?')){
+        //         // 이벤트(click해서 이동하는 것) 중지
+        //         event.preventDefault();
+        //     }
+        // }
+        
+        function fnA(){
+            if(!confirm('이동?')){
+                // 이벤트(click해서 이동하는 것) 중지
+                event.preventDefault();
+            }
+        }
+        
+
+    </script>
+</body>
+</html>

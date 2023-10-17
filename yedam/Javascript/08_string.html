@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // " ", ' ' => 문자 / 문자열
+        // 문자 -> 알파벳, 숫자, 한글 등등 한 개
+        // 문자열 -> 문자 한 개 이상
+        // 문자열(String) 다루기
+        // 문자열 자르기(substring)
+        // 문자열.substring(시작위치(인덱스), 끝나는 위치())
+               
+        let str = "abcdefghijklmn";
+        console.log(str.substring(1,5));
+        console.log(str.substring(5));
+
+        // 문자 위치 찾기
+        // indexof(찾을 문자) -> 위치를 안내
+        let str2 = "hello world";
+        console.log(str2.indexOf("l"));
+        // indexOf(찾을 문자, 시작 위치);
+        console.log(str2.indexOf("l", 4));
+        console.log(str2.indexOf("z")); //없는 문자는 -1이 나옴
+
+        // 문자열 길이 (띄어쓰기 포함)
+        console.log(str2.length); 
+
+        // 소문자 -> 대문자
+        console.log(str2.toUpperCase());
+        // 대문자 -> 소문자
+        console.log(str2.toLowerCase());
+
+        // 문자열 끝자리가 문자 확인
+        console.log(str2.endsWith("d"));
+        console.log(str2.endsWith("q"));
+
+        // 구분자를 기준으로 문자 나누기 (split)
+        // "1,2,3,4,5,6,7,8"
+        str = "hello,bye,java,power,book";
+        str2 = str.split(','); // str2가 배열 형태가 됨
+        console.log(str2);
+        
+        // 문자열 반복문 실행
+        str = "hello"; 
+        for(let i=0; i<str.length; i++){
+            str.substring(i,i+1);
+            console.log(str.substring(i,i+1) + "위치는 " + (i+1) + "입니다.");
+        }
+
+        // 문자열을 활용한 반복문
+        // 숫자를 하나 입력을 받습니다.
+        // ex) 20 -> 1,2,3,4,5....,19,20
+        // 단, 마지막 자리가 3,6,9로 끝이 나면 *로 표시를 해줍니다.
+        // ex) 1,2,*,4,5,*,7,8,*,10,11,12,1*,14,15,1*,17,18,1*,20
+        // endsWith, substring, String()
+
+        let num = Number(prompt("숫자를 입력하세요."));
+        for(let i=1; i<=num; i++){
+            let str3 = String(i);
+            if(str3.endsWith('3') || str3.endsWith('6') || str3.endsWith('9')){
+                str3 = str3.substring(0, str3.length-1);
+                str3 += "*";
+            }
+            console.log(str3);
+        }
+
+        // 해당 인덱스의 문자 얻기
+        // hello
+        let str3 = 'hello';
+        console.log(str3.charAt(1));
+
+        // 문자열 뒤집기
+        // reverse() 사용 금지
+        // hello -> olleh
+        // world -> dlrow
+        let str4 = "hello World";
+        // dlroW olleh
+        let result = '';
+        for(let i=str4.length; i>=0; i--){
+            result += str4.charAt(i);
+        }
+        console.log(result);
+
+
+
+    </script>
+</body>
+</html>

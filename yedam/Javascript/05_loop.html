@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 반복문
+        // for문, while문, dowhile문
+        // for문 -> 기본 for, for..in, for..of
+        // let result = result + 1;
+        // result = result + 1;
+        // result = result + 1;
+        // result = result + 1;
+        // result = result + 1;
+        // // 기본 for문
+        // for(let i = 1; i <= 4; i++){
+        //     // i가 1일때
+        //     // i가 2일때
+        //     // i가 3일때
+        //     // i가 4일때
+        //     result = result + i;
+        // }
+
+        // 1부터 10까지 더하는 연산
+        // let sum = sum + 1;
+        // sum = sum + 2;
+        // sum = sum + 3;
+        // sum = sum + 4;
+        // sum = sum + 5;
+        // sum = sum + 6;
+        // sum = sum + 7;
+        // sum = sum + 8;
+        // sum = sum + 9;
+        // sum = sum + 10;
+
+        let sum = 0;
+        for(let i = 1; i<=10; i++){   //i는 임시변수
+            console.log(i);
+            sum = sum + i;
+        }
+
+        console.log(sum);
+
+        // 1~100까지의 숫자 합을 구하는 반복문
+        for(let i = 1; i <= 100; i++){
+            sum = sum + i;
+        }
+        console.log(sum);
+
+        // 1~10까지 수 중에서 짝수만 출력
+
+        for(let i=1; i<=10; i++){
+            console.log(i);
+            if(i%2 == 0){
+                console.log("짝수 : " + i + " 입니다.");
+            }
+        }
+
+        // 1~100까지 수 중에서 홀수만 출력
+        // for(let i=1; i<=100; i++){
+        //     if(i%2 == 1){
+        //         console.log("홀수 : " + i + " 입니다.");
+        //     }
+        // }
+        for(let i=100; i>0; i--){
+            if(i%2 == 1){
+                console.log("홀수 : " + i + " 입니다.");
+            }
+        }
+
+        // 팩토리얼
+        // 3! => 3*2*1
+        // n! =>n*n-1*n-2*...*1
+
+        // 3
+        // 3 * 2
+        // 3 * 2 * 1
+        // 입력한 숫자에 대한 팩토리얼
+        let count = Number(prompt("원하는 값 입력"));
+        let fac = 1;
+        // for(let i=3; i>=1; i--){
+        //     // 1) 1 * 3
+        //     // 1) 1 * 3 * 2
+        //     // 1) 1 * 3 * 2 * 1
+        //     fac = fac * i;
+        // }
+
+        for(let i=1; i<=count; i++){
+            // 1) 1
+            // 2) 1 * i
+            // 3) 1 * 2 * i
+            fac = fac * i;
+        }
+        console.log(fac);
+
+        // 구구단
+        // 2단 출력하는 반복문
+        for(let i=1; i<=9; i++){
+            console.log("2*" + i + "=" + (2*i));
+        }
+
+        // 입력 받은 수까지 합 구하기
+        // 입력 > 50
+        // 1~50까지의 합
+        let no = Number(prompt("숫자 입력"));
+        sum = 0;
+        for(let i=1; i<=no; i++){
+            sum += i;
+        }
+        console.log(sum);
+
+        // 이중 for문, 중첩 for문
+        // for(){
+        //     for(){
+        //     }
+        // }
+
+        // 두개의 주사위의 합이 6이 되는 모든 경우 출력
+        // 1) 1+5
+        // 2) 2+4
+        // 3) 3+3
+        // 4) 4+2
+        // 5) 5+1
+
+        for(let i=1; i<=6; i++){
+            for(let j=1; j<=6; j++){
+                if(i+j == 6){
+                    console.log("두 개의 주사위 합이 6 :" + i + "," + j );
+                }
+            }
+        }
+
+        // 2~9단 출력하기
+        for(let i=2; i<=9; i++){
+            for(let j=1; j<=9; j++){
+                // console.log(i +"*"+ j+ "=" + (i*j))
+                document.write(i +"*"+ j+ "=" + (i*j))
+            }
+        }
+
+        // 별찍기
+        // *****
+        // *****
+        // *****
+        // *****
+        // *****
+        let star = '';
+        for(let i=1; i<=5; i++){
+            for(let j=1; j<=5; j++){
+                star = star + "*";
+            }
+            // star = star + "\n";
+            star += "\n";
+        }
+        console.log(star);
+
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+
+        star = '';
+        for(let i=1; i<=5; i++){
+            for(let j=1; j<=i; j++){
+                star += "*";
+            }
+            star += "\n";
+        }
+        console.log(star);
+
+        // *****
+        // ****
+        // ***
+        // **
+        // *
+        
+        star = '';
+        for(let i=1; i<=5; i++){
+            for(let j=5; j>=i; j--){
+                star += "*";
+            }
+            star += "\n";
+        }
+        console.log(star);
+
+
+        // *****
+        //  ****
+        //   ***
+        //    **
+        //     *
+
+        star = '';
+        for(let i=1; i<=5; i++){
+            for(let j=1; j<i ; j++){
+                star += " ";
+            }
+            for(let k=5; k>=i; k--){
+                star += "*";
+            }
+            star += "\n";
+        }
+        console.log(star);
+
+
+
+
+
+
+    </script>
+</body>
+</html>

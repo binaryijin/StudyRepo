@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="input" value="yedam" id="id" name="id">
+    <button type="button" id="btn" onclick="getInfo()">정보 추출</button>
+    <br>
+    <input type="input" id="id2" name="id2">
+    <button type="button" id="btn2" onclick="getInfo2()">정보 추출2</button>
+
+    <p style="border : 1px solid red"></p>
+    <script>
+        function getInfo(){
+            // 첫번째 input가 가진 데이터를 loading
+            let input = document.getElementById('id');
+            let str = input.value;
+
+            // p 태그 가져옴
+            let p = document.querySelector('p');
+            // p 태그에 첫번째 input tag에 있는 데이터 입력
+            p.textContent = str;
+
+            // input tag 데이터 삭제
+            input.value = '';
+            // input tag로 커서 이동
+            input.focus();
+        }
+        function getInfo2(){
+            let input = document.querySelectorAll('input')[1];
+            let str = input.value;
+
+            let p = document.querySelector('p');
+            p.textContent = str;
+        }
+    </script>
+</body>
+</html>

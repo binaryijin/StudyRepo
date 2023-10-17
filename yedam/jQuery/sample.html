@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>제목</p>
+        <input type="text" name="title" value="스토너">
+    </div>
+    <script>
+        // let pTag = jQuery('#app > p'); //app 밑에 p태그 모두
+        // console.log(pTag.text());
+        let pTag = document.querySelector('#app > p'); // 첫번째만 1개 가져옴 (querySelectorAll : 모두)
+        pTag = document.getElementById('app').querySelector('p'); // 위아래 둘다 가능
+        console.log(pTag.textContent);
+
+
+        // let inputTag = $('input[name="title"]');
+        // let title = inputTag.val();
+        let inputTag = document.querySelector('input[name="title"]');
+        inputTag = document.getElementsByName('title')[0]; // ~s 배열형태 -> 인덱스 사용
+
+        let title = inputTag.value;
+
+
+        // let hTag = $('<h3/>');
+        // hTag.text(title);
+        let hTag = document.createElement('h3');
+        hTag.textContent = title;
+
+
+        // $('div').append(hTag);
+        document.getElementById('app').append(hTag);
+        document.getElementsByName('div')[0].append(hTag);
+
+        
+    </script>
+</body>
+</html>

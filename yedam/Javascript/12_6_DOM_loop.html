@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        background-color: brown;
+        color : white;
+        font-size: 10px;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- span, h2, img, ul, li -->
+    </div>
+    <script>
+        // span
+
+        // <span></span>
+        let span = document.createElement('span');
+        // <span class='red'></span>
+        span.classList.add('red');
+        // <span class='red' id="sp1"></span>
+        span.setAttribute('id', 'sp1');
+        // <span class='red' id="sp1">span입니다.</span>
+        span.textContent = "span입니다.";
+
+        // <h2></h2>
+        let h2 = document.createElement('h2');
+        // <h2>h2 텍스트입니다.</h2>
+        h2.textContent = "h2 텍스트입니다.";
+
+        // <img>
+        let img = document.createElement('img');
+        // <img src="원하는 이미지">
+        img.setAttribute('src', 'image.jpg');
+        // <img src="원하는 이미지" alt="loading fail">
+        img.setAttribute('img', 'loading fail');
+        // <img src="원하는 이미지" alt="loading fail" style="height:100px">
+        img.style.height = '100px';
+
+        // ul, li 생성
+
+        let ul = document.createElement('ul');
+        // 반복문을 활용해서 li 만들기
+        // 3개
+        for(let i=0; i<3; i++){
+            // li 생성
+            // <li></li>
+            let li = document.createElement('li');
+            // <li class='red'></li>
+            li.classList.add('red');
+            // <li class='red'>텍스트 i</li>
+            li.textContent = `텍스트${i}`;
+            // <ul>
+            //     <li class='red'>텍스트 i</li>
+            // </ul>
+            ul.appendChild(li);
+        }
+        let div = document.getElementById('app');
+        // appendChild - 하나씩 자식 추가
+        div.appendChild(span);
+        div.appendChild(h2);
+        div.appendChild(img);
+        div.appendChild(ul);
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

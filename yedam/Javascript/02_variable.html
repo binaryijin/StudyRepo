@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("===var test===");
+        console.log(test1); //데이터 X
+        // console.log("===let test===");
+        // console.log(test2);
+    // 표현식 (단어, 데이터)
+    // 10
+    // const
+    // +
+    // 문장(단어와 데이터 등이 이루어져서)
+    console.log('안녕');
+    10+10;
+    // 프로그램(여러개의 문장이 모여서 만들어짐)
+
+    //키워드(예약어)->자바스크립트에서 미리 선점한 단어들 27P)
+    
+    //주석
+    //1) 공부 내용 간단히 표현
+    //2) 개발
+
+    //출력
+    //데이터, 내 코드가 잘 작동되고 있는지 확인용
+
+    // 원시형 데이터 타입
+    // 1. 숫자형 - 변수에 숫자가 들어가는 경우
+    //변수만 봐도 어떠한 용도인지 알수있게
+    let num = 1; //num : 변수
+    let no = 1;
+    console.log(typeof no);
+    // 2. 문자형 - 변수에 문자가 들어가는 경우
+    let str = 'javascript';
+    let str2 = "javascript2";
+    console.log(str);
+    console.log(str2);
+    console.log(typeof str);
+    // 3. 불리언(bool) - true / false => 참/거짓 판단할때 사용
+    let result = ((1+1) == (1+2));
+    console.log(result);
+    console.log(typeof result);
+    // 4. null - 정체를 모르는 데이터가 입력되었을 때
+    let var1 = null;
+    console.log(var1);
+    // 5. undefined - 변수에 데이터가 아예 없을 때
+    let data;
+    console.log(data);
+    // 6. NaN - not a number -> 문자 => 숫자 바꿀 수 있다.
+    // 'javascript' -> 숫자로 불가능 -> NaN
+    // '1' -> 숫자로 가능 -> Number
+    let str3 = 'java'; //'',""문자
+    console.log(typeof str3);
+    let num2 = Number(str3);
+    console.log(num2);
+
+    // 참조형 데이터 타입 -> pass -> 배열, 객체할때
+
+    // 자료형 변환
+    // 숫자 -> 문자
+    // 문자 -> 숫자
+
+    let str4 = "12345";
+    let str5 = "123.123";
+    let str6 = "12345aaa";
+    // 1. Number() -> 문자 => 숫자
+    // 소수점이 존재하면 포함해서 변환, 단 숫자에 문자가 포함되어 있으면 안됨(NaN)
+    console.log("=====자료형 변환=====")
+    let num3 = Number(str5);
+    console.log(num3);
+
+    let num4 = Number(str6);
+    console.log(num4);
+    // 2. parseInt() -> 문자 => 숫자(정수일때)
+    // 숫자에 문자가 포함되어 있으면 문자 빼고 숫자로 변환
+    let num5 = parseInt(str6);
+    console.log(num5);
+    // 3. parseFloat() -> 문자 => 숫자(실수일때)
+    console.log(parseFloat(str5));
+
+    // 숫자 -> 문자
+    // 1. toString()
+    let str7 = num3.toString();
+    console.log(typeof str7);
+    console.log(str7);
+    // 2. String()
+    num3 = null;
+    let str8 = String(num3);
+    console.log(typeof str8);
+    console.log(str8);
+    
+
+
+
+    // - 변수 이름 정하는 규칙
+    // 1) 변수 숫자로 시작 X
+    // 2) 변수 공백 포함 X
+    // ex) 25current, curr ent 사용불가
+    // 3) 대소문자 구별
+    // ex) current, Current, CURRENT 다 다른 변수
+    // 4) 한 단어로 이루어진 변수 -> 주로 소문자
+    // ex) current, age, sum
+    // 5) 두 단어 이상으로 이루어진 변수 -> 언더바(_) 또는 대문자를 섞어 사용
+    // ex) current_year (스네이크) / currentYear (카멜)
+    // 6) 자바스크립트에서 미리 선점한 키워드(예약어) 변수로 사용 X
+
+
+
+    // let, var, const - 변수의 사용 범위(스코프)
+    
+    // var -> 어디서든지 사용할 수 있는 변수
+    var test1 = 1;
+    // let - 생성 후 쓸 수 있는 변수
+    let test2 = 1;
+    // const -> 상수 => 변하지 않는 불변의 값, 한번 데이터 입력 후 변경 X
+    const test3 = 1;
+    // test3 = 5;
+
+    // 변수 사용 범위(스코프)
+    // 기본적으로 { }:중괄호 안에서 생성되고 벗어나면 삭제되는게 원칙
+    // 원칙을 무시할 수 있는 변수 : var
+
+    {
+        let test4 = 5;
+        var test5 = 5;
+    }
+    console.log(test5);
+    // console.log(test4);
+
+    // 변수 재사용 -> 한번 만들어 놓은 변수 다시 사용
+    // num1~4, str1~8
+    console.log("===변수 재사용===");
+    console.log(num);
+    num = 10;
+    console.log(num);
+    num = 15;
+    console.log(typeof num);
+    num = "123";
+    console.log(typeof num);
+    num = 15;
+    console.log(typeof num);
+
+
+    </script>
+</body>
+</html>

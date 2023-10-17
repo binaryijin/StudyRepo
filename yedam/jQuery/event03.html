@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        //event - 필드(target, currentTarget), 메소드 (preventDefault(), stopPropagation())
+        //target : 이벤트가 실제로 발생한 태그, currentTarget : 이벤트 핸들러를 동작시키는 태그
+        //preventDefault() : 이미 애초에 등록 되어있는 이벤트를 막는 메소드, stopPropagation() : 버블링을 막음
+    </script>
+    <!-- 이벤트 버블링 -->
+    <form>
+        <div>
+            <p>
+                <a>선택</a>
+                <input type="text" id="msg">
+            </p>
+        </div>
+    </form>
+    <script>
+        // $('*').on('click', log);
+
+        function log(e){
+            alert("현재 태그 : " + e.currentTarget.tagName);
+            if(e.currentTarget.tagName == 'DIV'){
+                e.stopPropagation();
+            }
+        }
+    </script>
+    <!-- 각 태그의 on속성 -->
+    <input type="text">
+    <button type="button" id="btn">등록</button>
+    <input type="text">
+    <button type="button" id="btn">등록</button>
+    <input type="text">
+    <button type="button" id="btn">등록</button>
+    <script>
+        $('.btn').click(appendP);
+
+        function appendP(e){
+            let btn = e.currentTarget;
+            let inputVal = $(btn).prev().val();
+            $('body').append('<p>' + inputVal + '</p>');
+        }
+    </script>
+</body>
+</html>

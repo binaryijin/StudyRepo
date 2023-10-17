@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // while문
+        // while(조건){
+        // }
+        let sum = 0;
+        while(sum < 10){
+            sum = sum + 1;
+            console.log(sum);
+        }
+        console.log("while 탈출");
+
+
+        let flag = true;
+        sum = 0;
+        while(flag){
+            sum = sum + 1;
+            if(sum == 10){
+                flag = false;
+            }
+        }
+
+        sum = 0;
+        while(true){
+            sum = sum + 1;
+            if(sum == 10){
+                break;
+            }
+        }
+
+        // 1~100까지의 수 중에서 짝수만 출력
+        let even = 0;
+        while(even <= 100){
+            if(even%2 == 0 && even != 0){
+                console.log("1~100사이의 짝수 : " + even);
+            }
+            even++;
+        }
+
+        // 구구단
+        let gugudan = 2;
+        let num = 1;
+        while(num <= 9){
+            console.log(gugudan + "*" +num + "=" + (gugudan*num));
+            num++;
+        }
+
+        // do-while
+        // do{
+        // 실행
+        // }while()
+
+        sum = 0;
+        do{
+            sum = sum + 1;
+        }while(sum<1);
+        console.log(sum);
+
+        // 1~100까지의 숫자 구해보는 do-while
+        let temp = 1;
+        do{
+            console.log(temp);
+            temp++;
+        }while(temp <= 100);
+
+        // break, continue
+        sum = 0;
+        flag = true;
+        while(flag){
+            sum = sum + 5;
+            // if(sum == 10){
+            //     console.log("break 종료");
+            //     break;
+            // }
+            switch(sum){ //switch문만 종료 -> 변수를 이용하여 다른 조건을 써야함
+                case 10:
+                    console.log("break 종료");
+                    flag = false;
+                    break;
+            }
+        }
+
+        for(let i=1; i<=10; i++){
+            console.log(i);
+            if(i == 5){
+                break; //for문 종료
+            }
+        }
+
+        // continue 계속 반복해라
+        // 짝수의 값만 출력을 하세요.
+        for(let i=1; i<=10; i++){
+            if(i%2 == 1){
+                continue;
+            }
+            console.log(i);
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

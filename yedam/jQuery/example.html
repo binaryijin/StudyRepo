@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=d, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+    <div id="date">
+        <div>
+            <input type="text" id="txDt" value="2023-12-25">
+        </div>
+        <div>
+            <p name="holiday">크리스마스 이브</p>
+            <input type="text" size="3">년
+            <input type="text" class="date" size="3">월
+            <input type="text" size="3">일
+            <button type="button">출력</button>
+        </div>
+        <div id="msg">
+            <div>
+                <label>
+                    <p class="title"></p>
+                    <input type="text">
+                </label>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 1)2023-12-25 -> 2023년12월25일
+        // let date = $('#txDt').val();
+        // let date2 = date.split('-');       
+        // $('.date').val(date2[1]);
+        // $('.date').prev().val(date2[0]);
+        // $('.date').next().val(date2[2]);
+
+        let dateVal = $('#txDt').val();
+        let dateAry = dateVal.split('-');
+
+        let dates = $('.date').parent().children('input');
+        for(let i=0; i < dates.length; i++){
+            dates[i].value = dateAry[i];
+        }
+
+        $('button').on('click', function(e){
+            //출력 버튼을 눌렀을 때
+            //2) 화면 상의 '크리스마스 이브' 값 -> p태그에 'Hello, World!' 문장과 같이 출력
+            let holiday = $('#date > div > p').text();
+            let msg = holiday + ' // ' + 'Hello, World!';
+            $('p.title').text(msg);
+
+            
+            //3) 2023년12월25일 -> 2023/12/24
+            let year = $('.date').prev().val();
+            let month = $('.date').val();
+            let day = $('.date').next().val();
+
+            let newDate = `${year}/${month}/${day-1}`;
+            $('#msg input').val(newDate);
+        });
+
+
+    </script>
+</body>
+</html>

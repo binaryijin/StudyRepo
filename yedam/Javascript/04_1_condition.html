@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 2. switch문 ~ case문
+        // switch(변수){ //같으면 T, 다르면 F
+        //     case 조건:
+        //         실행문
+        //         break;
+        //     case 조건:
+        //         실행문
+        //         break;
+        //         .
+        //         .
+        //         .
+        //     default: // else과 같음 default와 else는 옵션이기 때문에 있어도 되고 없어도 됨
+        //         실행문
+        //         break;
+        // }
+
+        // Number -> 입력한 값을 숫자로 바꾸기 위해
+        const input = Number(prompt("숫자 입력"));
+        // let no = input % 2;
+
+        switch(input % 2){
+            case 0:
+                alert("짝수");
+                break;  // stop. switch문을 빠져나감 -> 종료
+            case 1:
+                alert("홀수");
+                break;
+            default:
+                alert("숫자가 아님");
+                break;
+        }
+
+        //문제
+        // 성적을 출력하는 예제
+        // 점수 입력 -> prompt();
+        // bonus) 100점도 A학점입니다를 출력 할 것,
+        // 단, A학점입니다. 출력하는 구문은 한번만 사용 할 것
+        // A : 90 이상
+        // B : 80~89
+        // C : 70~79
+        // D : 60~69
+        // switch()
+
+        const input2 = Number(prompt("점수 입력"));
+        switch(parseInt(input2/10)){
+            case 10:
+            case 9:
+                alert("A학점 입니다.");
+                break;
+            case 8:
+                alert("B학점 입니다.");
+                break;
+            case 7:
+                alert("C학점 입니다.");
+                break;
+            case 6:
+                alert("D학점 입니다.");
+                break;   
+        }
+
+        // if/switch
+        // 윤년 찾기
+        // 해당 년도와 월을 입력하면 그 월의 마지막 날 출력
+        // ex) 1. 2023 | 2. 1 -> 31일
+        // ex) 1. 2000 | 2. 2 -> 29
+        // 연도 입력 후 해당 년도가 윤년인지 아닌지 판단하는 프로그램
+        // 윤년의 조건
+        // 1. 연도가 4로 나누어 떨어지는 해는 윤년
+        // 2. 연도가 4로 나누어 떨어지더라도 100으로 나누어 떨어지는 해는 평년이다.
+        // 3. 연도가 400으로 나누어 떨어지는 해는 윤년이다.
+
+        let year = Number(prompt("연도 입력"));
+        let month = Number(prompt("월 입력"));
+        // 연도, 월 -> 마지막날 입력하는 변수
+        let days;
+        //구현 부분
+        // if(year % 4 == 0){
+        //     if(year % 100 == 0){
+        //         alert("평년입니다");
+        //         if(year % 400 == 0){
+        //         alert("윤년입니다");
+        //         }
+        //     }
+        //     alert("윤년입니다");
+        // }
+        
+        switch(month){
+            case 1: case 3: case 5: case 7:case 8: case 10: case 12:
+                days = 31;
+                break;
+            case 4: case 6: case 9: case 11:
+                days = 30;
+                break;
+            case 2:    
+                days = ((year % 4 == 0 && year % 100 !=0) || (year % 400 == 0)) ? 29 : 28;
+                break;
+        }
+        if((year % 4 == 0 && year % 100 !=0) || (year % 400 == 0)){
+            days = 29
+        }else {
+            days = 28;
+        }
+        break;
+        console.log(days);
+
+
+    </script>
+</body>
+</html>

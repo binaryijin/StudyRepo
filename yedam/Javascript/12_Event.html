@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 브라우저 페이지가 다 로딩(DOM이 다 생성)되고 나서 수행해야할 내용을 정의
+        document.addEventListener('DOMContentLoaded', ()=>{
+            let h1 = document.createElement('h1');
+            h1.textContent = "페이지가 로딩되고나서 추가됨";
+            document.body.append(h1);
+        })
+    </script>
+
+    <section id="section-sample">
+        <div id="div-sample">
+            <input type="button" value="클릭" onclick="addPTag()">
+        </div>
+    </section>
+
+    <script>
+        // addEventListner
+        // tag 선택 -> 이벤트 추가 -> 어떠한 이벤트를 추가하겠다
+        // DOM객체.addEventListner('이벤트 종류', 함수);
+        // let btn = document.querySelector('#div-smample>input[type="button"]');
+        // console.log(btn);
+        // btn.addEventListener('click', function(){
+        //     // p태그
+        //     let pTag = document.createElement('p');
+        //     pTag.textContent = 'P태그 생성';
+        //     // div DOM 선택 후 P 태그 추가
+        //     let div = document.getElementById('div-sample');
+        //     div.append(pTag);
+        // })
+
+        // DOMContentLoaded
+
+
+
+
+
+
+
+
+
+        // onclick
+        // <tag onclick="함수">
+        function addPTag(){
+            let pTag = document.createElement('p');
+            pTag.textContent = 'P태그 생성';
+            // div DOM 선택 후 P 태그 추가
+            let div = document.getElementById('div-sample');
+            div.append(pTag);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

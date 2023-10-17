@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let objAry = [
+            { 'empNo' : 1000, 'name' : 'Hong', 'dept' : 'Sales'},
+            { empNo : 2000, name : 'Kang', dept : 'Marketing'},
+            { empNo : 3000, name : 'Lee', dept : 'IT'}
+        ]
+
+        // console.log(objAry[0][empNo], objAry[0]['empNo'], objAry[0].empNo);
+        //objAry[0][empNo] 에러
+    </script>
+    <script>
+        $(function(){
+            selectEmployees();
+        });
+    </script>
+    <div>
+        <!-- 단건조회 / 등록 / 수정 / 삭제-->
+        <form id="info">
+            <div>
+                <label for="id">사원번호</label>
+                <input type="number" id="id" name="employee_id">
+            </div>
+            <div>
+                <label for="last">성</label>
+                <input type="text" id="last" name="last_name">
+            </div>
+            <div>
+                <label for="first">이름</label>
+                <input type="text" id="first" name="first_name">
+            </div>
+            <div>
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div>
+                <label for="job">직책</label>
+                <input type="text" id="job" name="job_id">
+            </div>
+            <div>
+                <label for="hireDate">입사일</label>
+                <input type="date" id="hireDate" name="hire_date">
+            </div>
+            <button type="button" id="insertBtn">등록</button>
+            <button type="button" id="updateBtn">수정</button>
+            <button type="button" id="deleteBtn">삭제</button>
+        </form>
+    </div>
+    <div>
+        <!-- 전체조회 -->
+        <button type="button" id="ckDel">선택삭제</button>
+        <table id="empList">
+
+        </table>
+    </div>
+    <script>
+        const header = ['employee_id','last_name','hire_date','job_id'];
+
+        //Utill
+        function getDate(sec){
+            let date = new Date(sec);
+            let year = date.getFullYear();
+            let month = ('0' + (date.getMonth() + 1)).substr(-2); //0부터 시작하기 때문에 +1, substr에 음수 -> 오른쪽부터 자름
+            let day = ('0' + date.getDate()).substr(-2);
+
+            return year + '-' + month + '-' + day;
+        }
+
+//배열은 for of, 객체는 for in
+        function selectEmployees(){
+            $.ajax({
+                url : 'http://192.168.0.37/myserver/empSelect',
+                type : 'get',
+                success : function(data){
+                    // console.log(result);
+                    // let thead = $('<thead/>');
+                    // $('#empList').append(thead);
+
+                    // create thead
+                    let theadTag = $('<thead/>');
+                    let trTag = $('<tr/>');
+                    
+                    for(let field of header){ //for in 값이 아니라 필드
+                        let thTag = $('<th/>').text(field);
+                        trTag.append(thTag);
+                    }
+
+                    theadTag.append(trTag);
+                    $('#empList').append(theadTag);
+
+                    // create tbody
+                    let tbodyTag = $('<tbody/>');
+
+                    $.each(data, function(idx, obj){ //tr을 만듦
+                        trTag = $('<tr/>');      
+
+                        //tr태그에 이벤트 
+                        trTag.on('click', function(e){
+                            let empId = e.currentTarget.firstElementChild.textContent;
+
+                            selectEmpInfo(id);
+                        });
+
+                        for(let field of header){ //td를 만듦
+                            let tdTag = $('<td/>').text(obj[field]);
+                            trTag.append(tdTag);
+                        }
+                        tbodyTag.append(trTag);
+                    });
+                    $('#empList').append(tbodyTag);
+                },
+                error : function(reject){
+                    console.log(reject);
+                }           
+            })
+        }
+        //단건 조회
+        function selectEmpInfo(id){
+            
+        }
+
+
+
+
+
+
+        // DB 데이터 -> table
+        // function selectEmployees(){
+        //     $.ajax({
+        //         url : 'http://192.168.0.37/myserver/empSelect',
+        //         type : 'get',
+        //         success : function(data){
+        //             // console.log(result);
+        //             // let thead = $('<thead/>');
+        //             // $('#empList').append(thead);
+
+        //             // create thead
+        //             let theadTag = $('<thead/>');
+        //             let trTag = $('<tr/>');
+                    
+        //             for(let field in data[0]){ //for in 값이 아니라 필드
+        //                 let thTag = $('<th/>').text(field);
+        //                 trTag.append(thTag);
+        //             }
+
+        //             theadTag.append(trTag);
+        //             $('#empList').append(theadTag);
+
+        //             // create tbody
+        //             let tbodyTag = $('<tbody/>');
+
+        //             $.each(data, function(idx, obj){ //tr을 만듦
+        //                 trTag = $('<tr/>');
+
+        //                 for(let field in obj){ //td를 만듦
+        //                     let tdTag = $('<td/>').text(obj[field]);
+        //                     trTag.append(tdTag);
+        //                 }
+        //                 tbodyTag.append(trTag);
+        //             });
+        //             $('#empList').append(tbodyTag);
+        //         },
+        //         error : function(reject){
+        //             console.log(reject);
+        //         }
+            
+        //     })
+        // }
+    </script>
+</body>
+</html>

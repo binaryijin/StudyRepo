@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label> 아이디 : <input type="text" id="id" name="name" placeholder="아이디를 입력하세요(10자 이상)"></label>
+    <button type="button" id="btn" value="N" onclick="confirmInfo()">확인</button>
+    <br>
+    <label> 비밀번호 : <input type="password" id="pw" name="pw"></label>
+    <button type="button" id="pwBtn" value="N" onclick="pwInfo()">확인</button>
+    <br>
+    <!-- 
+        주소 입력
+        input -> 대구광역시에 사는 사람만 데이터 입력
+        대구광역시 어쩌구 어쩌동 -> 입력 가능
+        대구광역시 어쩌구 어쩌동 -> 입력 불가능
+        => 주소 맨 앞에 대구광역시가 들어오는 데이터만 허가
+    -->
+    <label> 주소
+        <input type="text" id="addr" name="addr">
+    </label>
+    <button type="button" id="addrBtn" value="N" onclick="addrInfo()">확인</button>
+    <br>
+    <button type="button" id="saveBtn" onclick="saveInfo()">회원가입</button>
+
+    <div id="app" style="border: 2px solid purple">
+    </div>
+    <script>
+        function saveInfo(){
+            // 각 데이터들이 조건에 만족하는지 확인
+            let btnList = document.querySelectorAll('button');
+            console.log(btnList);
+            // 3개의 버튼
+            if(btnList[0].value == 'N'){
+                alert('ID 확인하세요');
+                return; // 함수 강제 종료
+            } else if(btnList[1].value == 'N'){
+                alert('PW 확인하세요');
+                return;
+            } else if(btnList[2].value == 'N'){
+                alert('주소 확인하세요');
+                return;
+            } else {
+                alert('데이터 확인 완료');
+            }
+
+
+
+
+
+            // 1) 각각의 input 있는 value를 가져와야함
+            let id = document.getElementById('id').value;
+            let pw = document.getElementById('pw').value;
+            let addr = document.getElementById('addr').value;
+            // 2) 가져온 value span에 생성해서 데이터 입력
+            // innerHTML
+            let span = document.createElement('span');
+            span.innerHTML = `${id} ${pw} ${addr}`;
+            // 3) span -> 임의 태그에 append 시켜서 목록 view 해줌
+            document.getElementById('app').append(span);
+            // 4) 추가된정보를 삭제하는 버튼 추가
+            let btn = document.createElement('button');
+            btn.innerHTML = `삭제`;
+            btn.setAttribute('onclick', 'removeBtn()');
+            document.getElementById('app').append(btn);
+            // 5) br 추가
+            let br = document.createElement('br');
+            document.getElementById('app').append(br);
+            // 데이터 삭제
+            document.getElementById('id').value = '';
+            document.getElementById('pw').value = '';
+            document.getElementById('addr').value = '';
+
+        }
+
+        function removeBtn(){
+            // 클릭한 버튼을 기준으로 다음 위치에 있는 DOM 삭제
+            event.target.nextElementSibling.remove(); //br
+            // 클릭한 버튼을 기준으로 앞에 위치한 DOM 삭제
+            event.target.previousElementSibling.remove();
+            // 자기 자신을 삭제
+            event.target.remove();
+        }
+
+
+
+
+
+        // function addrInfo() {
+        //     let addr = document.getElementById('addr');
+        //     let addrStr = addr.value;
+        //     if (addrStr == '') {
+        //         alert('주소 미입력');
+        //         addr.focus();
+        //     } else {
+        //         if (addrStr.substring(0, 5) == '대구광역시') {
+        //             alert("입력 가능");
+        //         } else {
+        //             alert('입력 불가능');
+        //             addr.value = '';
+        //             addr.focus();
+        //         }
+        //     }
+        // }
+        function addrInfo() {
+            let addr = document.getElementById('addr');
+            let addrStr = addr.value;
+            if(addrStr == ''){
+                alert('주소 미입력');
+                addr.focus();
+            }else{
+                // substring
+                // indexOf -> 데이터.indexOf('대구광역시') == 0
+                if(addrStr.indexOf('대구광역시')==0){
+                    alert("사용 가능한 주소");
+                    event.target.value = 'Y';
+                }else{
+                    alert("주소 오류");
+                }
+            }
+        }
+
+
+
+
+        function pwInfo() {
+            let pw = document.getElementById('pw');
+            let pwStr = pw.value;
+
+            if (pwStr == '') {
+                alert('비밀번호 미입력');
+                pw.focus();
+            } else {
+                // 비밀번호에 ! 포함이 되어 있으면 사용 불가
+                // indexof => 없으면 -1
+                if (pwStr.indexOf('!') >= 0) {
+                    alert('!가 존재합니다. 다시 입력하세요');
+                    pw.value = '';
+                    pw.focus();
+                } else {
+                    alert('사용할 수 있는 비밀번호');
+                    event.target.value = 'Y';
+                }
+            }
+        }
+
+        function confirmInfo() {
+            // input id
+            let id = document.getElementById('id');
+            // id 길이 체크
+            let str = id.value;
+
+            if (str == '') {
+                alert('아이디가 입력되지 않았습니다.');
+                id.focus();
+            } else {
+                // 아이디를 10글자 이상 입력
+                if (str.length >= 10) {
+                    alert('사용할 수 있음');
+                    document.getElementById('pw').focus();
+                    id.readOnly = true; //
+                    event.target.disabled = true; // 이벤트 버튼 비활성화
+                    // btn의 value N -> Y
+                    event.target.value = 'Y';
+                } else {
+                    alert('사용할 수 없음');
+                    id.value = '';
+                    id.focus();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

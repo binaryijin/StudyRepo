@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+     <script>
+        /*
+        $.ajax({
+            // 접속할 주소, 통신을 일으키는 경로
+            url : , 
+            // 데이터를 전송하는 방식 (method : get, post, put, delete 등)
+            type : , 
+            // 전송할 데이터, : 클라이언트가 서버로 보내는 데이터
+            data : ,
+            // 전송할 데이터의 content-type
+            // - default : application/x-www-form-urlencoded (별도로 지정하지 않으면 디폴트값)
+            // - json    : application/json 
+            contentType : ,
+            // 리턴되는 데이터의 타입 -> text, json, xml : 해당 타입에 따라서 자동 파싱
+            dataType : , 
+            // 전송에 성공했을 경우
+            success : function(data){
+
+            },
+            // 전송에 실패했을 경우
+            error : function(reject){
+                console.log(reject);
+            },
+
+            // 추가 속성
+            async : 비동기를 제어 - default : true / false면 동기식으로 동작 (단, 페이지 처리 불가)
+            beforeSend : 전송이 이루어지기 직전에 해야하는 작업을 등록
+
+        })
+        //https://reqres.in/
+        */
+     </script>
+     <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>last_name</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <form>
+            <h3>유저 정보</h3>
+            <label>id         : <input type="number" name="id" readonly></label><br>
+            <label>first_name : <input type="text" name="first_name"></label><br>
+            <label>last_name  : <input type="text" name="last_name"></label><br>
+            <label>email      : <input type="email" name="email"></label><br>
+            <label>avatar     : <img src="" name="avatar" alt="이미지"></label><br>
+            <button type="reset">초기화</button>
+            <button type="submit">저장</button>
+        </form>
+     </div>
+     <script>
+        // 전체 조회 : https://reqres.in/api/users?page=2, GET
+        $.ajax({
+            url :'https://reqres.in/api/users?page=2',
+            type :'get',
+            success : function(result){
+                let data = result.data;
+                // console.log(data);
+
+                $(data).each(function(idx, obj){
+                    let trTag = $('<tr/>');
+                    trTag.on('click', function(e){
+                        if(e.target.tagName == 'BUTTON') return;
+
+                        let id = e.currentTarget.firstElementChild.textContent;
+                        selectUser(id);
+                    });
+
+                    let tdTag = $('<td/>').text(obj['id']);
+                    trTag.append(tdTag);
+
+                    tdTag = $('<td/>').text(obj['last_name']);
+                    trTag.append(tdTag);
+
+                    let btnTag = $('<button/>').text('Del'); //삭제버튼
+
+                    btnTag.on('click', function(e){
+                        e.stopPropagation();
+                        let id = e.currentTarget.parentNode.parentNode.firstElementChild.textContent;
+                        // e.currentTarget.closest('tr').firstElementChild.textContent;
+                        deleteUser(id);
+                    });
+
+                    tdTag = $('<td/>').append(btnTag);
+                    trTag.append(tdTag);
+
+                    $('tbody').append(trTag);
+                })
+            },
+            error : function(reject){
+                console.log(reject);
+            }
+        })
+
+        // alert("테스트를 진행해볼까요?");
+        // $('tbody tr').on('click', function(e){
+
+        // })
+
+        // 단건 조회 : https://reqres.in/api/users/ + id , get - 사용자가 원할때 동작해야하기 때문에 함수로 만듦
+        function selectUser(id){
+            $.ajax({
+                url : 'https://reqres.in/api/users/' + id,
+                type : 'get',
+                success : function(result){
+                    let data = result.data;
+                    
+                    for(let field in data){
+                        let selector = 'form input[name="'+ field + '"]';
+                        // console.log(selector);
+                        $(selector).val(data[field]);
+                    }
+
+                    $('form img[name="avatar"]').prop('src', data.avatar);
+                },
+                error : function(reject){
+                    console.log(reject);
+                }
+            })
+        }
+
+
+        $('form').on('submit', function(e){
+            e.preventDefault();
+            // 1) form -> userInfo
+            let userInfo = getUserInfo();
+
+            // 2) userInfo -> Server Update
+            if(userInfo.id != ''){
+                updateUser(userInfo);
+            }else{
+                createUser(userInfo);
+            };
+
+        });
+
+        // 등록 : https://reqres.in/api/users/, post => 값을 body에 집어넣어서 보냄
+        function createUser(obj){
+
+            $.ajax({
+                url : 'https://reqres.in/api/users/',
+                type : 'post',
+                contentType : 'application/json',
+                data : JSON.stringify(obj),
+                success : function(data){
+                    // console.log(data);
+                    if(data != null){
+                        $('form input[name="id"]').val(data.id);
+                        alert('정상적으로 등록되었습니다.');
+                    }
+                },
+                error : function(reject){
+                    console.log(reject);
+                }
+            })
+        }
+
+        // 수정 : https://reqres.in/api/users/ + id , put => 값을 body에 집어넣어서 보냄
+        function updateUser(obj){
+            $.ajax({
+                url : 'https://reqres.in/api/users/' + obj.id ,
+                type : 'put', 
+                contentType : 'application/json',
+                data : JSON.stringify(obj),
+                success : function(result){
+                    // console.log(result);
+                    if(result != null){
+                        alert(`수정이 완료되었습니다. 수정시간 : ${result['updatedAt']}`);
+                    }
+                },
+                error : function(reject){
+                    conso.log(reject);
+                }
+            });
+
+        }
+
+        // jQuery -> Form 태그 내부 값을 가져오는 메소드
+        //          1) serialize()      -> QueryString : id=7&first_name=Kil-dong&last_name=Hong&...
+        //          2) serializeArray() -> Object Array : [ { "name" : "id", "value" : "7" } ,
+        //                                                  { "name" : "first_name", "value" : "Kil-dong", } ]
+        function getUserInfo(){
+            let inputList = $('form').serializeArray();
+
+            let userInfo = {};
+            $.each(inputList, function(idx, obj){
+                // 예를 들어, obj = { "name" : "id", "value" : "7" }
+                userInfo[obj.name] = obj.value; // userInfo['id'] = '7';
+            });
+            return userInfo;
+        }
+
+
+        // 삭제 : https://reqres.in/api/users/ + id , delete
+        function deleteUser(id){
+            $.ajax({
+                url : 'https://reqres.in/api/users/' + id,
+                type : 'delete',
+                success : function(data, status, xhr){
+                    // console.log(data, status, xhr);
+                    if(xhr.status == 204){
+                        alert('정상적으로 삭제되었습니다.');
+                    };
+                },
+                error : function(reject){
+                    console.log(reject);
+                }
+            })
+        }
+     </script>
+</body>
+</html>

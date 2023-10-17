@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+</head>
+<body>
+    <script>
+        // 연산자 -> + - * /
+        // 단항, 이항, 삼항
+        // 단항 => 피연산자가 한개
+        // ++, -- (증감연산자)
+        let num = 1;
+        // num = num + 1;
+        console.log(num++); // 문장 실행 (출력)후 1증가
+        console.log(++num); // 1증가 후 문장 실행
+
+        // 이항 => 피연산자가 두개 (1+1)
+        // +, -, *, /, % (산술 연산자)
+        let sum = 10 + 10;
+        let sub = 20 - 10;
+        let div = 50 / 5; // 몫 10
+        let div2 = 50 % 5; // 나머지 0 (모듈러 연산)
+        let sup = 20 * 30;
+
+        // 복합 대입 연산자
+        // = (대입 연산자) -> 우항을 좌항에 대입한다. let temp = 10;
+        // +=, -=, *=, /=, %= (복합 대입 연산자)
+        // sum = sum + 10; // 내 자신에게 +10
+        sum += 10;
+        console.log(sum);
+        sum *= 10;
+        console.log(sum);
+        sum /= 7;
+        console.log(parseInt(sum));
+
+
+        // 비교 연산자 : ==(데이터만 비교), !=, ===(데이터와 타입까지 비교), >, <, >=, <=
+        // 결과 : boolean(True/False)
+        let fNum = 1;
+        let sNum = 2;
+        let tNum = '1';
+
+        console.log("===비교 연산자")
+        console.log(fNum == sNum);
+        console.log(fNum != sNum);
+        console.log(fNum == tNum);
+        console.log(fNum === tNum);
+
+        console.log(fNum > sNum);
+        console.log(fNum <= sNum);
+
+        // 논리 연산자 : &&, ||
+        // &&(*) AND
+        // ||(+) OR
+        // TRUE 1이상
+        // FALSE 0
+        console.log("===논리 연산자")
+        console.log( true && true );
+        console.log( fNum < sNum && fNum >= sNum); // T x F = 0(F)
+        console.log( fNum < sNum || fNum >= sNum);
+
+        // 문자 연산자 : +
+        // 문자 사이에서 +를 사용하면 두개의 문자를 합칠때 사용
+
+        let str9 = "yedam" + ' ' + 'yedam' + 100 + 100;
+        console.log(str9);
+        // 문자 + 숫자 = 문자, 정수 + 실수 = 실수
+
+        // 부정 연산자 : not -> !
+        console.log(!true);
+        console.log(!(fNum < sNum && fNum >= sNum));
+
+        // 삼항 => 피연산자가 세개
+        // 조건 ? True : False
+        // 조건이 True -> 첫번째 구문 실행
+        // 조건이 False -> 두번째 구문 실행
+
+        let result2 = fNum < sNum ? 'fNum이 작음' : 'fNum이 큼';
+        console.log(result2);
+
+        // 입력 받은 세자리의 수의 각 자리의 합을 구해 출력하세요.
+        // ex) 888 -> 8 + 8 + 8 = 24
+        // ex) 753 -> 7 + 5 + 3 = 15
+        let number = window.prompt("세자리 수 입력");
+        // 출력 예시
+        number = (number%10 + parseInt((number/10)%10) + parseInt(number/100));
+        // number = ((number/100)+());
+        // let hundred = parseInt(number / 100);
+        // let ten = parseInt((number - (hundred * 100)) / 10);
+        // let one = (number - (hundred * 100) - (10 * ten));
+        // num = hundred + ten + one
+        // console.log(hundred);
+        // console.log(ten);
+        // console.log(one);
+        // console.log(number);
+        window.alert(number);
+
+
+    </script>
+</body>
+</html>
