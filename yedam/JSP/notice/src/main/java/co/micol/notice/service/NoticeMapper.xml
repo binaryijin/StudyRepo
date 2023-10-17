@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.notice.service.NoticeMapper">
+	<select id="noticeSelectList" resultType="co.micol.notice.service.NoticeVO">
+		SELECT * FROM notice ORDER BY notice_id DESC
+	</select>
+	
+	<select id = "noticeSelect" parameterType="co.micol.notice.service.NoticeVO" resultType="co.micol.notice.service.NoticeVO">
+		SELECT * FROM notice
+		WHERE notice_id = #{noticeId}
+	</select>
+	
+	<insert id="noticeInsert"
+		parameterType="co.micol.notice.service.NoticeVO">
+		<selectKey keyProperty="noticeId" resultType="int" order="BEFORE">
+			SELECT MAX(notice_id) + 1 AS noticeId FROM notice
+		</selectKey>
+		INSERT INTO notice
+		VALUES(#{noticeId}, #{noticeWriter}, #{noticeTitle}, #{noticeSubject}, #{noticeWdate}, 0)
+	</insert>
+	
+	<update id="noticeUpdate" parameterType="co.micol.notice.service.NoticeVO">
+		UPDATE notice
+		<set>
+			<if test="noticeWriter != null">notice_writer = #{noticeWriter}, </if>
+			<if test="noticeTitle != null">notice_title = #{noticeTitle}, </if>
+			<if test="noticeWdate != null">notice_wdate = #{noticeWdate}, </if>
+			<if test="noticeSubject != null">notice_subject = #{noticeSubject} </if>
+		</set>
+		WHERE notice_id = #{noticeId}
+	</update>
+	
+	<delete id="noticeDelete">
+		DELETE FROM notice
+		WHERE notice_id = #{noticeId}
+	</delete>
+</mapper>
